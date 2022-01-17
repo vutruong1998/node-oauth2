@@ -1,10 +1,10 @@
-Example: localhost:3000/oauth/token
-Headers
+- Example: localhost:3000/oauth/token
+- Headers
 {
     "Authorization": "Basic " + Buffer.from("clientId:clientSecret").toString("base64"),
     "Content-Type": "application/x-www-form-urlencoded"
 }
-Body
+- Body
 {
     "username": "truong",
     "password": "p@ssword",
