@@ -11,7 +11,6 @@ const main = async () => {
     // const [key] = keyStore.all({ use: "sig" });
     const key = keyStore.get({ kid: 'v82irmFXNDsBVUQFI7eInSBzpX2v6Mus4jMCmgPHtEQ', kty: 'RSA', use: 'sig' });
 
-    console.log(key)
     
     const opt = { compact: true, jwk: key, fields: { typ: "jwt" } };
     
