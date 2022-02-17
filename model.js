@@ -1,6 +1,8 @@
+const jwt = require('jsonwebtoken')
+
 // DUMMY DATA
 const config = {
-  // for password, refresh_token grant
+  	// for password, refresh_token grant
 	clients: [{
 		id: 'application',
 		clientId: 'clientId',
@@ -50,7 +52,6 @@ const getClient = (clientId, clientSecret) => {
 }
 
 const saveToken = (token, client, user) => {
-	// console.log(token, client, user)
 	token.client = {
 		id: client.clientId
 	}
@@ -59,6 +60,14 @@ const saveToken = (token, client, user) => {
 	}
 	config.tokens.push(token)
 	return token
+}
+
+// override generate access token
+const generateAccessToken = (client, user, scope) => {
+	// console.log(scope)
+	let accessToken
+	accessToken = jwt.sign({ sub: 'sub', scope }, 'shhhhh')
+	return accessToken
 }
 
 /*
@@ -107,15 +116,16 @@ const revokeToken = (token) => {
 }
 
 const validateScope = (user, client, scope) => {
-	const VALID_SCOPES = ['read', 'write']
+	const VALID_SCOPES = ['read', 'write', 'speak']
 
-	if (!scope.split(',').every(s => VALID_SCOPES.indexOf(s) >= 0)) {
+	if (!scope.split(' ').every(s => VALID_SCOPES.indexOf(s) >= 0)) {
 	  return false
 	}
 	return scope
 }
 
 module.exports = {
+	generateAccessToken,
 	getAccessToken,
 	getClient,
 	saveToken,
