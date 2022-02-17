@@ -22,6 +22,5 @@ const main = async () => {
     });
     
     const token = await jose.JWS.createSign(opt, key).update(payload).final();
-    console.log(token)
 }
 main()
